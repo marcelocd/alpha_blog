@@ -14,6 +14,8 @@ class User < ApplicationRecord
 
   has_many :articles
 
+  has_secure_password
+
   private
 
   def downcase_email
