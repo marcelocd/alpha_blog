@@ -27,7 +27,8 @@
           </div>
         </div>
         <div class="mt-4 mb-2 d-grid gap-2 col-2 mx-auto">
-          <%= f.submit 'Sign up', class: 'btn btn-outline-light' %>
+          <%= f.submit(@user.new_record? ? 'Sign up' : 'Update account',
+                       class: 'btn btn-outline-light') %>
         </div>
       <% end %>
     </div>
