@@ -1,14 +1,17 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: [:index, :new, :create]
+  before_action :find_user, only: [:show, :edit, :update]
 
   def index
-    @users = User.paginate(page: params[:page],
-                           per_page: 5)
+    @users = User.order(username: :asc)
+                 .page(params[:page])
+                 .per_page(5)
   end
 
   def show
-    @user = User.find(params[:id])
     @articles = @user.articles
+                     .order(updated_at: :desc)
+                     .page(params[:page])
+                     .per_page(5)
   end
 
   def new
@@ -18,6 +21,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(valid_params)
     if @user.save!
+      session[:user_id] = @user.id
 			flash[:notice] =
         "Welcome to the Alpha Blog, #{@user.username}! You have successfully signed up."
 			redirect_to articles_path
