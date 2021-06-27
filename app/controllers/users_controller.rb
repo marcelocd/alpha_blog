@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_action :find_user, except: [:new, :create]
+  before_action :find_user, except: [:index, :new, :create]
+
+  def index
+    @users = User.all
+  end
 
   def show
     @user = User.includes(:articles).find(params[:id])
