@@ -1,8 +1,8 @@
 <h1 class="text-center mt-4">Listing All Articles</h1>
-<div class="container">
-  <%= render @articles %>
+<div class="pagination justify-content-center mt-5">
+  <%= will_paginate @articles %>
 </div>
-<p>
-	<%= link_to 'Home page', root_path %> |
-	<%= link_to 'Create new article', new_article_path %>
-</p>
+<%= render @articles %>
+<div class="pagination justify-content-center">
+  <%= will_paginate @articles %>
+</div>

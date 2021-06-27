@@ -1,2 +1,8 @@
 <h1 class="text-center mt-4">Alpha Bloggers</h1>
+<div class="pagination justify-content-center mt-5">
+  <%= will_paginate @users %>
+</div>
 <%= render @users %>
+<div class="pagination justify-content-center">
+  <%= will_paginate @users %>
+</div>
