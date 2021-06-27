@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:edit, :update]
+  before_action :find_user, except: [:new, :create]
+
+  def show
+    @user = User.includes(:articles).find(params[:id])
+    @articles = @user.articles
+  end
 
   def new
     @user = User.new
