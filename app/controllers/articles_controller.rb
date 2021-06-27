@@ -16,7 +16,6 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(article_params)
-
 		if @article.save
 			flash[:notice] = 'Article was created successfully!'
 			redirect_to @article
@@ -51,6 +50,6 @@ class ArticlesController < ApplicationController
 	def article_params
 		params.require(:article)
 					.permit(:title, :description)
-					.merge(user: User.first)
+					.merge(user: current_user)
 	end
 end
