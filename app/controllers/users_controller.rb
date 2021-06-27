@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(:articles).find(params[:id])
+    @user = User.find(params[:id])
     @articles = @user.articles
   end
 
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   def update
     if @user.update!(valid_params)
 			flash[:notice] = "Your account information was successfully updated!"
-			redirect_to articles_path
+      redirect_to @user
 		else
 			render 'edit'
 		end
