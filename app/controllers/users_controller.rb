@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(valid_params)
-    if @user.save!
+    if @user.save
       session[:user_id] = @user.id
 			flash[:notice] =
         "Welcome to the Alpha Blog, #{@user.username}! You have successfully signed up."
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   def edit ; end
 
   def update
-    if @user.update!(valid_params)
+    if @user.update(valid_params)
 			flash[:notice] = "Your account information was successfully updated!"
       redirect_to @user
 		else
