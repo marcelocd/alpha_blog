@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
-	before_action :set_article, only: [:show, :edit, :update, :destroy]
+	before_action :set_article, only: %i[show edit update destroy]
+	before_action :require_user, except: %i[index show]
+	before_action :require_same_user, only: %i[edit update destroy]
 
 	def index
 		@articles = Article.order(created_at: :desc)
@@ -51,5 +53,12 @@ class ArticlesController < ApplicationController
 		params.require(:article)
 					.permit(:title, :description)
 					.merge(user: current_user)
+	end
+
+	def require_same_user
+		if current_user != @article.user
+			flash[:alert] = "You can only edit or delete your own articles."
+			redirect_to @article
+		end
 	end
 end
