@@ -21,8 +21,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(valid_params)
-    if @user.save
+    if @user = User.create(valid_params)
       session[:user_id] = @user.id
 			flash[:notice] =
         "Welcome to the Alpha Blog, #{@user.username}! You have successfully signed up."
