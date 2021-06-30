@@ -1,5 +1,8 @@
 class CategoriesController < ApplicationController
   def index
+    @categories = Category.order(:name)
+                          .page(params[:page])
+                          .per_page(5)
   end
 
   def new
