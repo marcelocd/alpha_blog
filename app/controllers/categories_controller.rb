@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :set_category, only: %i[show edit update destroy]
   before_action :require_admin, except: %i[index show]
 
   def index
@@ -21,11 +22,29 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def edit ; end
+
+  def update
+    if @category.update(valid_params)
+			flash[:notice] = 'Category updated successfully!'
+			redirect_to category_path(@category)
+		else
+			render 'edit'
+		end
+  end
+
   def show
-    @category = Category.find(params[:id])
+    @articles = @category.articles
+                         .order(updated_at: :desc)
+                         .page(params[:page])
+                         .per_page(5)
   end
 
   private
+
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
   def valid_params
     params.require(:category)
