@@ -11,6 +11,14 @@
                       user_path(@article.user) %>
           <%= link_to gravatar_for(@article.user),
                       user_path(@article.user) %>
+          <% if @article.categories.any? %>
+            <div class="mt-2">
+              <% @article.categories.each do |category| %>
+                <%= link_to category.name, category_path(category),
+                                           class: 'badge rounded-pill bg-info mr-2' %>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="card-body">
           <div class="card-text text-start">
