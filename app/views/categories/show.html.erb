@@ -3,7 +3,7 @@
 </h1>
 <% if logged_in? && current_user.admin? %>
   <div class="text-center mt-4">
-    <%= link_to 'Edit category',
+    <%= link_to 'Edit category name',
                 edit_category_path(@category),
                 class: 'btn btn-outline-info' %>
     <%= link_to 'Delete category',
