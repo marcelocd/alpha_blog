@@ -1,6 +1,6 @@
 <h1 class="text-center mt-4"><%= @user.username %>'s profile</h1>
 <%= gravatar_for @user, size: 200 %>
-<% if @user == current_user || current_user.admin? %>
+<% if @user == current_user || current_user.try(:admin?) %>
   <div class="text-center mt-4">
     <%= link_to (@user == current_user ? 'Edit your profile' :
                                          'Edit profile'),
